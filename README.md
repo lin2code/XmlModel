@@ -1,12 +1,14 @@
 # SixAnts.XmlFile
-一个快速创建、读取、编辑Xml文件的类XmlFile。使用非常简单。
-再也不用去查XmlDocument、XmlNode、XmlElement类的用法了。
-A quickly Create/Read/Edit Xml file Class XmlFile.Very simple to use.
-No more XmlDocument/XmlNode/XmlElement, never search thoese class usage again.
+一个快速创建、读取、编辑Xml文件的类XmlFile。使用非常简单。  
+再也不用去查XmlDocument、XmlNode、XmlElement类的用法了。  
+用法如下：以下代码可以到测试项目中查看  
 
-用法如下/how to use：
-以下代码可以到测试项目中查看/code below can find in the test project
-class Program
+A quickly Create/Read/Edit Xml file Class XmlFile.Very simple to use.  
+No more XmlDocument/XmlNode/XmlElement, never search thoese class usage again.  
+how to use：code below can find in the test project  
+
+```
+    class Program
     {
         static void Main(string[] args)
         {
