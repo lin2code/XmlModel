@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SixAnts.XmlFile", "SixAnts.XmlFile\SixAnts.XmlFile.csproj", "{1DE688E0-00B6-4423-930E-E211FC48A4DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlFileTest", "XmlFileTest\XmlFileTest.csproj", "{21B8F151-6E89-4CC6-B17E-151C65AEC7D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DE688E0-00B6-4423-930E-E211FC48A4DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DE688E0-00B6-4423-930E-E211FC48A4DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DE688E0-00B6-4423-930E-E211FC48A4DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DE688E0-00B6-4423-930E-E211FC48A4DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B8F151-6E89-4CC6-B17E-151C65AEC7D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B8F151-6E89-4CC6-B17E-151C65AEC7D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B8F151-6E89-4CC6-B17E-151C65AEC7D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B8F151-6E89-4CC6-B17E-151C65AEC7D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
