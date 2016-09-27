@@ -108,7 +108,7 @@ namespace SixAnts.Tools
         {
             if(Root == null)
             {
-                throw new Exception("Root不能为空");
+                throw new Exception("Root can't be null");
             }
             GetXmlDocument();
             if(!Directory.Exists(XmlDirectory))
@@ -116,6 +116,17 @@ namespace SixAnts.Tools
                 Directory.CreateDirectory(XmlDirectory);
             }
             XmlDoc.Save(XmlDirectory + FileName);
+        }
+
+        /// <summary>
+        /// Delete file
+        /// </summary>
+        public void Delete()
+        {
+            if(File.Exists(XmlDirectory + FileName))
+            {
+                File.Delete(XmlDirectory + FileName);
+            }
         }
 
         /// <summary>

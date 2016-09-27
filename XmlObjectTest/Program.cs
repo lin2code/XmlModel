@@ -18,12 +18,22 @@ namespace XmlObjectTest
              * XmlBaseTag can't have child tag insie
              */
 
-            Create();
-            Read();
-            Edit();
-            QuicklyGet();
-
-            Console.ReadLine();
+            while (true)
+            {
+                Console.WriteLine("Input a command:");
+                switch (Console.ReadLine().ToLower())
+                {
+                    case "new": 
+                        Create();
+                        Read();
+                        Edit();
+                        QuicklyGet();
+                        break;
+                    case "delete":
+                        Delete();
+                        break;
+                }
+            }
         }
 
         //Create a xmlfile
@@ -32,14 +42,16 @@ namespace XmlObjectTest
             XmlChildTag rootTag = new XmlChildTag("Root");
             rootTag.BaseTagList.Add(new XmlBaseTag("BaseTagOne"));
             XmlObject myXmlObject = new XmlObject("D:\\XML\\", "MyXmlObject.xml", "utf-8", rootTag);
+            Console.WriteLine("Create success");
         }
 
         //Read a xml file
         public static void Read()
         {
             XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
-            Console.WriteLine(myXml.Root.Name);
-            Console.WriteLine((myXml.Root as XmlChildTag).BaseTagList.First().Name);
+            string rootName = myXml.Root.Name;
+            string baseTagOneName = (myXml.Root as XmlChildTag).BaseTagList.First().Name;
+            Console.WriteLine("Read success");
         }
 
         //Edit a xml file 
@@ -62,6 +74,7 @@ namespace XmlObjectTest
             root.ChildTagList.Add(newChild);
             //save to file
             myXml.Save();
+            Console.WriteLine("Edit success");
         }
 
         //Quickly Get and edit
@@ -81,6 +94,15 @@ namespace XmlObjectTest
             XmlBaseTag target = childB.BaseTagList.Where(b => b.Attrs.Keys.Contains("testa")).First();
             target.InnerText = "quickly get combine with lambda let you read write xml file very quick";
             myXml.Save();
+            Console.WriteLine("QuicklyGet success");
+        }
+
+        //Delete
+        public static void Delete()
+        {
+            XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
+            myXml.Delete();
+            Console.WriteLine("Delete success");
         }
     }
 }
