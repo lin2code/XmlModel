@@ -1,5 +1,10 @@
 # XmlObject
   An object mapping to xml, makes xml CURD operation quickly like operate an object.  
+## Install  
+Download source code generate it yourself or search `XmlObject` in nuget or excute command below.  
+```
+Install-Package CodeFarmer.Tools.XmlObject
+```
 ## Classes
 * `XmlObject` Class use to create read xml file and find node, represent a xml file.
 * `XmlTag` A abstract model of xml node.Has two properties **Name** and **Attrs** as xml node's Name and Attributes.
