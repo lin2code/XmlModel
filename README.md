@@ -11,7 +11,9 @@ Install-Package CodeFarmer.Tools.XmlObject
 * `XmlChildTag` Inherit of XmlTag, model of a xml node that have child node.Has Two List **ChildTagList** and **BaseTagList** as xml node's child node.
 * `XmlBaseTag` Inherit of XmlTag, model of a xml node that don't have child.Has a property **InnerText** as xml node's inner text.  
 
-## Usage
+## Usage  
+**`Using`**  
+`using CodeFarmer.Tools;`  
 **`Create`** a xml file must have a root, root is XmlTag Type, so you must create a XmlChildTag or XmlBaseTag as root.  
 Use constructor new a XmlObject then the xml file is created.  
 The parameters are **FileDirectory**, **FileName**, **EncodeType**, **RootTag**  
