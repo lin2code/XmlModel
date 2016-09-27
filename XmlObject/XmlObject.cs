@@ -9,82 +9,72 @@ using System.Xml;
 namespace SixAnts.Tools
 {
     /// <summary>
-    /// Xml文件
-    /// XmlFile
+    /// Object mapping of a xml file
     /// </summary>
-    public class XmlFile
+    public class XmlObject
     {
         /// <summary>
-        /// 文件路径
-        /// File Directory
+        /// Directory of this xml file 
         /// </summary>
         public string XmlDirectory { get; set; }
 
         /// <summary>
-        /// 文件名称
-        /// File Name
+        /// Xml file name
         /// </summary>
         public string FileName { get; set; }
 
         /// <summary>
-        /// 文件编码方式
-        /// File Encode
+        /// Xml file encode
         /// </summary>
         public string Encode { get; set; }
 
         /// <summary>
-        /// 根节点
-        /// Root Tag
+        /// Root tag
         /// </summary>
         public XmlTag Root { get; set; }
 
         /// <summary>
-        /// XmlDocument格式内容
-        /// XmlDocument type content
+        /// XmlDocument object of this xml file
         /// </summary>
         private XmlDocument XmlDoc { get; set; }
 
         /// <summary>
-        /// 默认构造
-        /// Default Constructor
+        /// Default constructor
         /// </summary>
-        public XmlFile()
+        public XmlObject()
         {
 
         }
 
         /// <summary>
-        /// 构造：用于创建Xml文件
-        /// Constructor:Use to create a xml file
+        /// Constructor: Use to create a xml file
         /// </summary>
-        /// <param name="directory">路径</param>
-        /// <param name="fileName">文件名</param>
-        /// <param name="encode">编码方式</param>
-        /// <param name="root">根节点</param>
-        public XmlFile(string directory, string fileName, string encode, XmlTag root)
+        /// <param name="directory">directory</param>
+        /// <param name="fileName">fileName</param>
+        /// <param name="encode">encode type</param>
+        /// <param name="root">root tag</param>
+        public XmlObject(string directory, string fileName, string encode, XmlTag root)
         {
             Create(directory, fileName, encode, root);
         }
 
         /// <summary>
-        /// 构造：用于读取Xml文件
-        /// Constructor:Use to read a xml file
+        /// Constructor: Use to read a xml file
         /// </summary>
-        /// <param name="directory">路径</param>
-        /// <param name="fileName">文件名</param>
-        public XmlFile(string directory, string fileName)
+        /// <param name="directory">directory</param>
+        /// <param name="fileName">fileName</param>
+        public XmlObject(string directory, string fileName)
         {
             Read(directory, fileName);
         }
 
         /// <summary>
-        /// 创建Xml文件
         /// Create a xml file
         /// </summary>
-        /// <param name="directory">路径</param>
-        /// <param name="fileName">文件名</param>
-        /// <param name="encode">编码</param>
-        /// <param name="root">根节点</param>
+        /// <param name="directory">directory</param>
+        /// <param name="fileName">fileName</param>
+        /// <param name="encode">encode type</param>
+        /// <param name="root">root tag</param>
         public void Create(string directory, string fileName, string encode, XmlTag root)
         {
             XmlDirectory = directory;
@@ -98,11 +88,10 @@ namespace SixAnts.Tools
         }
 
         /// <summary>
-        /// 读取Xml文件
         /// Read a xml file
         /// </summary>
-        /// <param name="directory"></param>
-        /// <param name="fileName"></param>
+        /// <param name="directory">directory</param>
+        /// <param name="fileName">fileName</param>
         public void Read(string directory, string fileName)
         {
             XmlDirectory = directory;
@@ -113,8 +102,7 @@ namespace SixAnts.Tools
         }
 
         /// <summary>
-        /// 保存
-        /// Save
+        /// Save Object to file
         /// </summary>
         public void Save()
         {
@@ -131,8 +119,7 @@ namespace SixAnts.Tools
         }
 
         /// <summary>
-        /// 获取当前XmlFile对应的XmlDocument
-        /// Get current XmlFile's XmlDocument
+        /// Get current XmlObject's XmlDocument type object
         /// </summary>
         /// <returns></returns>
         public XmlDocument GetXmlDocument()
@@ -147,7 +134,6 @@ namespace SixAnts.Tools
         }
 
         /// <summary>
-        /// 递归转换XmlNode为XmlTag
         /// Recurtion transfer XmlNode into XmlTag
         /// </summary>
         /// <param name="node">XmlNode</param>
@@ -206,7 +192,6 @@ namespace SixAnts.Tools
         }
 
         /// <summary>
-        /// 递归转换XmlTag为XmlNode
         /// Recurtion transfer XmlTag into XmlNode
         /// </summary>
         /// <param name="tag">XmlTag</param>
@@ -225,7 +210,7 @@ namespace SixAnts.Tools
                 XmlChildTag childTag = tag as XmlChildTag;
                 if(childTag.BaseTagList.Count == 0 && childTag.ChildTagList.Count == 0)
                 {
-                    throw new Exception("XmlChildTag" + childTag.Name + "的BaseTagList和ChildTagList不能同时为空，如果当前节点没有子节点请使用XmlBaseTag类型");
+                    throw new Exception("A XmlChildTag " + childTag.Name + "'s BaseTagList and ChildTagList can't both empty，if this tag don't have any child please use XmlBaseTag type");
                 }
                 //添加对应的子节点
                 foreach (XmlTag innerTag in childTag.BaseTagList)
@@ -246,27 +231,26 @@ namespace SixAnts.Tools
         }
 
         /// <summary>
-        /// 快速获取一个XmlChildTag
         /// Quickly get a XmlChildTag
         /// </summary>
-        /// <param name="tagNames">按顺序输入的节点名称/tag's name input by order</param>
+        /// <param name="tagNames">tag's name input by order</param>
         /// <returns></returns>
         public XmlChildTag GetChildTag(params string[] tagNames)
         {
             if(tagNames[0] != Root.Name)
             {
-                throw new Exception("根节点名称不正确。");
+                throw new Exception("Root tag doesn't match");
             }
             if(!(Root is XmlChildTag))
             {
-                throw new Exception("节点：" + tagNames[0] + " 不是XmlChildTag类型");
+                throw new Exception("Root " + tagNames[0] + " must be XmlChildTag type");
             }
             XmlChildTag result = Root as XmlChildTag;
             for (int i = 1; i < tagNames.Length; i++)
             {
                 if(result.ChildTagList.Where(t => t.Name == tagNames[i]).Count() == 0)
                 {
-                    throw new Exception("找不到XmlChildTag类型节点：" + tagNames[i]);
+                    throw new Exception("Can't find XmlChildTag tag " + tagNames[i] + " by the input tag names with this order");
                 }
                 result = result.ChildTagList.Where(t => t.Name == tagNames[i]).First();
             }
@@ -274,7 +258,6 @@ namespace SixAnts.Tools
         }
 
         /// <summary>
-        /// 快速获取一个XmlBaseTag
         /// Quickly get a XmlBaseTag
         /// </summary>
         /// <param name="tagNames">按顺序输入的节点名称/tag's name input by order</param>
@@ -283,7 +266,7 @@ namespace SixAnts.Tools
         {
             if (tagNames[0] != Root.Name)
             {
-                throw new Exception("根节点名称不正确。");
+                throw new Exception("Root tag doesn't match");
             }
             if (Root is XmlBaseTag)
             {
@@ -293,7 +276,7 @@ namespace SixAnts.Tools
                 }
                 else
                 {
-                    throw new Exception("节点：" + tagNames[0] + " 已经是XmlBaseTag，没有子节点");
+                    throw new Exception("Root " + tagNames[0] + " is XmlBaseTag type, don't have any childs");
                 }
             }
             XmlChildTag ChildTag = Root as XmlChildTag;
@@ -301,7 +284,7 @@ namespace SixAnts.Tools
             {
                 if (ChildTag.ChildTagList.Where(t => t.Name == tagNames[i]).Count() == 0 && ChildTag.BaseTagList.Where(t => t.Name == tagNames[i]).Count() == 0)
                 {
-                    throw new Exception("找不到子节点" + tagNames[i]);
+                    throw new Exception("Can't find XmlTag " + tagNames[i] + " by the input tag names with this order");
                 }
                 //最后一个节点查找BaseTagList，否则查找ChildTagList
                 if (i == tagNames.Length - 1)
@@ -312,7 +295,7 @@ namespace SixAnts.Tools
                     }
                     else
                     {
-                        throw new Exception("节点：" + tagNames[i] + " 必须是XmlBaseTag类型");
+                        throw new Exception("Tag：" + tagNames[i] + " must be XmlBaseTag type");
                     }
                 }
                 else
@@ -324,7 +307,7 @@ namespace SixAnts.Tools
                     }
                     else
                     {
-                        throw new Exception("节点：" + tagNames[i] + " 必须是XmlChildTag类型");
+                        throw new Exception("Tag：" + tagNames[i] + " must be XmlChildTag type");
                     }
                 }
             }

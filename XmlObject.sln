@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SixAnts.XmlFile", "SixAnts.XmlFile\SixAnts.XmlFile.csproj", "{1DE688E0-00B6-4423-930E-E211FC48A4DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlObject", "XmlObject\XmlObject.csproj", "{1DE688E0-00B6-4423-930E-E211FC48A4DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlFileTest", "XmlFileTest\XmlFileTest.csproj", "{21B8F151-6E89-4CC6-B17E-151C65AEC7D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlObjectTest", "XmlObjectTest\XmlObjectTest.csproj", "{21B8F151-6E89-4CC6-B17E-151C65AEC7D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
