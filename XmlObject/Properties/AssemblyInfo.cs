@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("SixAnts.XmlObject")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("XmlObject")]
+[assembly: AssemblyDescription("An object mapping to xml file. Quicky CURD xml like object.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SixAnts.XmlObject")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("CodeFarm")]
+[assembly: AssemblyProduct("Tools")]
+[assembly: AssemblyCopyright("Copyright © CodeFramer 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

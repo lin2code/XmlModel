@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml;
 
-namespace SixAnts.Tools
+namespace CodeFarmer.Tools
 {
     /// <summary>
     /// Object mapping of a xml file
