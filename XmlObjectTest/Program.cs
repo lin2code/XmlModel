@@ -28,9 +28,16 @@ namespace XmlObjectTest
                         Read();
                         Edit();
                         QuicklyGet();
+                        PrintXmlObject();
                         break;
                     case "delete":
                         Delete();
+                        break;
+                    case "nofile":
+                        CreateWithOutFile();
+                        break;
+                    case "string":
+                        ReadXmlString();
                         break;
                 }
             }
@@ -91,8 +98,13 @@ namespace XmlObjectTest
 
             //quickly get tag from a XmlChildTag
             XmlChildTag childB = myXml.GetChildTag("NewRoot", "NewChild");
+            //lambda
             XmlBaseTag target = childB.BaseTagList.Where(b => b.Attrs.Keys.Contains("testa")).First();
             target.InnerText = "quickly get combine with lambda let you read write xml file very quick";
+            //continue quickly get
+            XmlBaseTag target2 = childB.GetBaseTag("BaseTagTwo");
+            target2.InnerText = "quickly get can be use on XmlChildTag too.";
+
             myXml.Save();
             Console.WriteLine("QuicklyGet success");
         }
@@ -103,6 +115,36 @@ namespace XmlObjectTest
             XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
             myXml.Delete();
             Console.WriteLine("Delete success");
+        }
+
+        //To string
+        public static void PrintXmlObject()
+        {
+            XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
+            Console.WriteLine(myXml.ToString());
+        }
+
+        //Create from tag only
+        public static void CreateWithOutFile()
+        {
+            XmlChildTag root = new XmlChildTag("root");
+            root.BaseTagList.Add(new XmlBaseTag("base") { InnerText = "test" });
+            XmlObject myXml = new XmlObject(root);
+            myXml.XmlDirectory = "d:\\";
+            myXml.FileName = "nofile.xml";
+            myXml.Encode = "utf-8";
+            myXml.Save();
+        }
+
+        //Read from xml String
+        public static void ReadXmlString()
+        {
+            XmlObject newxml = new XmlObject(new XmlObject("D:\\XML\\", "MyXmlObject.xml").ToString());
+            newxml.Root.Name = "newroot";
+            newxml.XmlDirectory = "d:\\";
+            newxml.FileName = "newxml.xml";
+            newxml.Encode = "gbk";
+            newxml.Save();
         }
     }
 }

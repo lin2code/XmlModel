@@ -38,6 +38,8 @@ namespace CodeFarmer.Tools
         /// </summary>
         private XmlDocument XmlDoc { get; set; }
 
+        #region constructor
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -47,7 +49,7 @@ namespace CodeFarmer.Tools
         }
 
         /// <summary>
-        /// Constructor: Use to create a xml file
+        /// Constructor: Create XmlObject from XmlTag and save xml file
         /// </summary>
         /// <param name="directory">directory</param>
         /// <param name="fileName">fileName</param>
@@ -55,11 +57,20 @@ namespace CodeFarmer.Tools
         /// <param name="root">root tag</param>
         public XmlObject(string directory, string fileName, string encode, XmlTag root)
         {
-            Create(directory, fileName, encode, root);
+            CreateWithFile(directory, fileName, encode, root);
         }
 
         /// <summary>
-        /// Constructor: Use to read a xml file
+        /// Constructor: Create XmlObject from XmlTag only
+        /// </summary>
+        /// <param name="root">root tag</param>
+        public XmlObject(XmlTag root)
+        {
+            CreateWithOutFile(root);
+        }
+
+        /// <summary>
+        /// Constructor: Read XmlObject From xml file
         /// </summary>
         /// <param name="directory">directory</param>
         /// <param name="fileName">fileName</param>
@@ -69,26 +80,45 @@ namespace CodeFarmer.Tools
         }
 
         /// <summary>
-        /// Create a xml file
+        /// Constructor: Read XmlObject From xml string
+        /// </summary>
+        /// <param name="xml">xml string</param>
+        public XmlObject(string xml)
+        {
+            Read(xml);
+        }
+
+        #endregion
+
+        #region Create and Read XmlObject
+
+        /// <summary>
+        /// Create XmlObject from XmlTag and save xml file
         /// </summary>
         /// <param name="directory">directory</param>
         /// <param name="fileName">fileName</param>
         /// <param name="encode">encode type</param>
         /// <param name="root">root tag</param>
-        public void Create(string directory, string fileName, string encode, XmlTag root)
+        public void CreateWithFile(string directory, string fileName, string encode, XmlTag root)
         {
             XmlDirectory = directory;
             FileName = fileName;
             Encode = encode;
-            //初始化
             Root = root;
-            XmlDoc = new XmlDocument();
-            XmlDoc.AppendChild(XmlDoc.CreateXmlDeclaration("1.0", Encode, ""));
             Save();
         }
 
         /// <summary>
-        /// Read a xml file
+        /// Create XmlObject from XmlTag only
+        /// </summary>
+        /// <param name="root"></param>
+        public void CreateWithOutFile(XmlTag root)
+        {
+            Root = root;
+        }
+
+        /// <summary>
+        /// Read XmlObject From xml file
         /// </summary>
         /// <param name="directory">directory</param>
         /// <param name="fileName">fileName</param>
@@ -102,7 +132,57 @@ namespace CodeFarmer.Tools
         }
 
         /// <summary>
+        /// Read XmlObject From xml string
+        /// </summary>
+        /// <param name="xml">xml string</param>
+        public void Read(string xml)
+        {
+            XmlDoc = new XmlDocument();
+            XmlDoc.LoadXml(xml);
+            Root = NodeToTag(XmlDoc.DocumentElement);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Get current XmlObject's XmlDocument type object
+        /// </summary>
+        /// <returns></returns>
+        public XmlDocument GetXmlDocument()
+        {
+            //create xmlobject xmldoc is null
+            if (XmlDoc == null)
+            {
+                XmlDoc = new XmlDocument();
+            }
+            //replace root
+            if (XmlDoc.DocumentElement != null)
+            {
+                XmlDoc.RemoveChild(XmlDoc.DocumentElement);
+            }
+            XmlDoc.AppendChild(TagToNode(Root));
+            //add or edit declaration
+            if (XmlDoc.FirstChild is XmlDeclaration)
+            {
+                if (!string.IsNullOrEmpty(Encode))
+                {
+                    (XmlDoc.FirstChild as XmlDeclaration).Encoding = Encode;
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(Encode))
+                {
+                    throw new Exception("Encode can't be empty");
+                }
+                XmlDoc.InsertBefore(XmlDoc.CreateXmlDeclaration("1.0", Encode, ""), XmlDoc.FirstChild);
+            }
+            return XmlDoc;
+        }
+
+        /// <summary>
         /// Save Object to file
+        /// XmlDirectory and FileName and Encode need to be set before save
         /// </summary>
         public void Save()
         {
@@ -110,6 +190,11 @@ namespace CodeFarmer.Tools
             {
                 throw new Exception("Root can't be null");
             }
+            if (string.IsNullOrEmpty(XmlDirectory) || string.IsNullOrEmpty(FileName))
+            {
+                throw new Exception("XmlDirectory and FileName need to be set before save");
+            }
+            //generate xmldocument
             GetXmlDocument();
             if(!Directory.Exists(XmlDirectory))
             {
@@ -130,19 +215,15 @@ namespace CodeFarmer.Tools
         }
 
         /// <summary>
-        /// Get current XmlObject's XmlDocument type object
+        /// Get xml string
         /// </summary>
         /// <returns></returns>
-        public XmlDocument GetXmlDocument()
+        public override string ToString()
         {
-            //更新前清空原内容
-            if (XmlDoc.DocumentElement != null)
-            {
-                XmlDoc.RemoveChild(XmlDoc.DocumentElement);
-            }
-            XmlDoc.AppendChild(TagToNode(Root));
-            return XmlDoc;
+            return GetXmlDocument().OuterXml;
         }
+
+        #region Helper
 
         /// <summary>
         /// Recurtion transfer XmlNode into XmlTag
@@ -324,5 +405,7 @@ namespace CodeFarmer.Tools
             }
             return null;
         }
+
+        #endregion
     }
 }
