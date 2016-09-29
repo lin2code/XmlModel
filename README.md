@@ -12,8 +12,8 @@ Install-Package CodeFarmer.Tools.XmlObject
 * `XmlBaseTag` Inherit of XmlTag, model of a xml node that don't have child.Has a property **InnerText** as xml node's inner text.  
 
 ## Usage  
-**`Using`**  
-`using CodeFarmer.Tools;`  
+**`Using CodeFarmer.Tools;`**  
+
 **`Create`** a xml file must have a root, root is XmlTag Type, so you must create a XmlChildTag or XmlBaseTag as root.  
 Use constructor new a XmlObject then the xml file is created.  
 The parameters are **FileDirectory**, **FileName**, **EncodeType**, **RootTag**  
@@ -70,5 +70,6 @@ The parameters are **FileDirectory**, **FileName**, **EncodeType**, **RootTag**
             XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
             myXml.Delete();
 ```  
-
-And every method and property are public, you can do what you want.
+  
+And you can use XmlObject.ToString() get xml string. you can create a XmlObject From only XmlTag or xml string, but need set few properties before save to file.  
+Check it out in the test project.
