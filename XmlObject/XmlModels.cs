@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeFarmer.Tools
+namespace XmlOject
 {
     /// <summary>
     /// XmlTag: A xml tag
