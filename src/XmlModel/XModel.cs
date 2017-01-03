@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml;
 
-namespace XmlOject
+namespace XmlModel
 {
     /// <summary>
     /// Object mapping of a xml file
     /// </summary>
-    public class XmlObject
+    public class XModel
     {
         /// <summary>
         /// Directory of this xml file 
@@ -43,57 +43,57 @@ namespace XmlOject
         /// <summary>
         /// Default constructor
         /// </summary>
-        public XmlObject()
+        public XModel()
         {
 
         }
 
         /// <summary>
-        /// Constructor: Create XmlObject from XmlTag and save xml file
+        /// Constructor: Create XmlModel from XmlTag and save xml file
         /// </summary>
         /// <param name="directory">directory</param>
         /// <param name="fileName">fileName</param>
         /// <param name="encode">encode type</param>
         /// <param name="root">root tag</param>
-        public XmlObject(string directory, string fileName, string encode, XmlTag root)
+        public XModel(string directory, string fileName, string encode, XmlTag root)
         {
             CreateWithFile(directory, fileName, encode, root);
         }
 
         /// <summary>
-        /// Constructor: Create XmlObject from XmlTag only
+        /// Constructor: Create XmlModel from XmlTag only
         /// </summary>
         /// <param name="root">root tag</param>
-        public XmlObject(XmlTag root)
+        public XModel(XmlTag root)
         {
             CreateWithOutFile(root);
         }
 
         /// <summary>
-        /// Constructor: Read XmlObject From xml file
+        /// Constructor: Read XmlModel From xml file
         /// </summary>
         /// <param name="directory">directory</param>
         /// <param name="fileName">fileName</param>
-        public XmlObject(string directory, string fileName)
+        public XModel(string directory, string fileName)
         {
             Read(directory, fileName);
         }
 
         /// <summary>
-        /// Constructor: Read XmlObject From xml string
+        /// Constructor: Read XmlModel From xml string
         /// </summary>
         /// <param name="xml">xml string</param>
-        public XmlObject(string xml)
+        public XModel(string xml)
         {
             Read(xml);
         }
 
         #endregion
 
-        #region Create and Read XmlObject
+        #region Create and Read XmlModel
 
         /// <summary>
-        /// Create XmlObject from XmlTag and save xml file
+        /// Create XmlModel from XmlTag and save xml file
         /// </summary>
         /// <param name="directory">directory</param>
         /// <param name="fileName">fileName</param>
@@ -109,7 +109,7 @@ namespace XmlOject
         }
 
         /// <summary>
-        /// Create XmlObject from XmlTag only
+        /// Create XmlModel from XmlTag only
         /// </summary>
         /// <param name="root"></param>
         public void CreateWithOutFile(XmlTag root)
@@ -118,7 +118,7 @@ namespace XmlOject
         }
 
         /// <summary>
-        /// Read XmlObject From xml file
+        /// Read XmlModel From xml file
         /// </summary>
         /// <param name="directory">directory</param>
         /// <param name="fileName">fileName</param>
@@ -132,7 +132,7 @@ namespace XmlOject
         }
 
         /// <summary>
-        /// Read XmlObject From xml string
+        /// Read XmlModel From xml string
         /// </summary>
         /// <param name="xml">xml string</param>
         public void Read(string xml)
@@ -145,12 +145,12 @@ namespace XmlOject
         #endregion
 
         /// <summary>
-        /// Get current XmlObject's XmlDocument type object
+        /// Get current XmlModel's XmlDocument type object
         /// </summary>
         /// <returns></returns>
         public XmlDocument GetXmlDocument()
         {
-            //create xmlobject xmldoc is null
+            //create XmlModel xmldoc is null
             if (XmlDoc == null)
             {
                 XmlDoc = new XmlDocument();

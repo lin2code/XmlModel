@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XmlOject;
+using XmlModel;
 
-namespace XmlObjectTest
+namespace XmlModelTest
 {
     class Program
     {
         static void Main(string[] args)
         {
             /*
-             * XmlObject is an object mapping of a xml file
-             * XmlObject has two type tag: XmlChildTag and XmlBaseTag
+             * XModel is an object mapping of a xml file
+             * XModel has two type tag: XmlChildTag and XmlBaseTag
              * XmlChildTag must have child tag, means BaseTagList and ChildTagList can't both empty
              * XmlBaseTag can't have child tag insie
              */
@@ -28,7 +28,7 @@ namespace XmlObjectTest
                         Read();
                         Edit();
                         QuicklyGet();
-                        PrintXmlObject();
+                        PrintXModel();
                         break;
                     case "delete":
                         Delete();
@@ -48,14 +48,14 @@ namespace XmlObjectTest
         {
             XmlChildTag rootTag = new XmlChildTag("Root");
             rootTag.BaseTagList.Add(new XmlBaseTag("BaseTagOne"));
-            XmlObject myXmlObject = new XmlObject("D:\\XML\\", "MyXmlObject.xml", "utf-8", rootTag);
+            XModel myXModel = new XModel("D:\\XML\\", "MyXModel.xml", "utf-8", rootTag);
             Console.WriteLine("Create success");
         }
 
         //Read a xml file
         public static void Read()
         {
-            XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
+            XModel myXml = new XModel("D:\\XML\\", "MyXModel.xml");
             string rootName = myXml.Root.Name;
             string baseTagOneName = (myXml.Root as XmlChildTag).BaseTagList.First().Name;
             Console.WriteLine("Read success");
@@ -64,7 +64,7 @@ namespace XmlObjectTest
         //Edit a xml file 
         public static void Edit()
         {
-            XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
+            XModel myXml = new XModel("D:\\XML\\", "MyXModel.xml");
             //edit root name and attributes
             XmlChildTag root = myXml.Root as XmlChildTag;
             root.Name = "NewRoot";
@@ -87,7 +87,7 @@ namespace XmlObjectTest
         //Quickly Get and edit
         public static void QuicklyGet()
         {
-            XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
+            XModel myXml = new XModel("D:\\XML\\", "MyXModel.xml");
             //GetChildTag
             XmlChildTag childA = myXml.GetChildTag("NewRoot", "NewChild");
             childA.Attrs.Add("find", "ture");
@@ -112,15 +112,15 @@ namespace XmlObjectTest
         //Delete
         public static void Delete()
         {
-            XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
+            XModel myXml = new XModel("D:\\XML\\", "MyXModel.xml");
             myXml.Delete();
             Console.WriteLine("Delete success");
         }
 
         //To string
-        public static void PrintXmlObject()
+        public static void PrintXModel()
         {
-            XmlObject myXml = new XmlObject("D:\\XML\\", "MyXmlObject.xml");
+            XModel myXml = new XModel("D:\\XML\\", "MyXModel.xml");
             Console.WriteLine(myXml.ToString());
         }
 
@@ -129,7 +129,7 @@ namespace XmlObjectTest
         {
             XmlChildTag root = new XmlChildTag("root");
             root.BaseTagList.Add(new XmlBaseTag("base") { InnerText = "test" });
-            XmlObject myXml = new XmlObject(root);
+            XModel myXml = new XModel(root);
             myXml.XmlDirectory = "d:\\";
             myXml.FileName = "nofile.xml";
             myXml.Encode = "utf-8";
@@ -139,7 +139,7 @@ namespace XmlObjectTest
         //Read from xml String
         public static void ReadXmlString()
         {
-            XmlObject newxml = new XmlObject(new XmlObject("D:\\XML\\", "MyXmlObject.xml").ToString());
+            XModel newxml = new XModel(new XModel("D:\\XML\\", "MyXModel.xml").ToString());
             newxml.Root.Name = "newroot";
             newxml.XmlDirectory = "d:\\";
             newxml.FileName = "newxml.xml";

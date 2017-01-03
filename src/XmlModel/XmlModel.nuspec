@@ -6,13 +6,13 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <licenseUrl>https://github.com/631320085/XmlModel</licenseUrl>
+    <projectUrl>https://github.com/631320085/XmlModel</projectUrl>
+    <iconUrl>https://avatars0.githubusercontent.com/u/4160160</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>New Release</releaseNotes>
     <copyright>Copyright 2017</copyright>
-    <tags>An object mapping to xml file. Quicky CURD xml like object.https://github.com/631320085/XmlObject</tags>
+    <tags>xml xmlmodel Xml XmlModel</tags>
   </metadata>
 </package>
