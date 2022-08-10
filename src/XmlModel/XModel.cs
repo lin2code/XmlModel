@@ -232,6 +232,7 @@ namespace XmlModel
         /// <returns></returns>
         public XmlTag NodeToTag(XmlNode node)
         {
+#if false 
             //不转化注释
             for (int i = 0; i < node.ChildNodes.Count; i++)
             {
@@ -240,6 +241,7 @@ namespace XmlModel
                     node.RemoveChild(node.ChildNodes[i]);
                 }
             }
+#endif
             //判断当前节点类型返回对应类型节点
             if (node.ChildNodes.Count > 0 && node.FirstChild.NodeType != XmlNodeType.Text)
             {
@@ -269,7 +271,7 @@ namespace XmlModel
             }
             else
             {
-                XmlBaseTag baseTag = new XmlBaseTag(node.Name);
+                XmlBaseTag baseTag = new XmlBaseTag((node.NodeType == XmlNodeType.Comment) ? "XMLcomment" : node.Name);
                 //属性不为空添加属性
                 if (node.Attributes != null)
                 {
@@ -290,7 +292,14 @@ namespace XmlModel
         /// <returns></returns>
         public XmlNode TagToNode(XmlTag tag)
         {
-            XmlNode node = XmlDoc.CreateElement(tag.Name);
+            XmlNode node;
+            if ((tag is XmlBaseTag) && (tag.Name == "XMLcomment"))
+            {
+                node = XmlDoc.CreateComment((tag as XmlBaseTag).InnerText);
+                return node;
+            }
+
+            node = XmlDoc.CreateElement(tag.Name);
             foreach (var attr in tag.Attrs)
             {
                 XmlAttribute xmlAttr = XmlDoc.CreateAttribute(attr.Key);
